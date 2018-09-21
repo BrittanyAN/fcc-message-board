@@ -13,14 +13,12 @@ function ReplyHandler() {
         res.send("An error has occurred.")
       } else {
         var reqThread = board.threads.id(threadId);
-        var reqReplies = reqThread.replies;
-        reqReplies.forEach((item) => {
+        reqThread.replies.forEach((item) => {
           item.delete_password = undefined;
-        });
-        reqReplies.forEach((item) => {
           item.reported = undefined;
         });
-        reqThread.replies = reqReplies;
+        reqThread.delete_password = undefined;
+        reqThread.reported = undefined;
         
         res.json(reqThread);
         
